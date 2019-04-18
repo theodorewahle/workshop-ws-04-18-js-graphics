@@ -42,7 +42,6 @@ $.getJSON("data_dartmouth.json", function (data) {
 $(this).siblings().velocity({
   scale: 0.8
 }, 200);
-
   });
   // velocity stuff part 2 (rotating on selection)
 
@@ -146,6 +145,7 @@ const burst = new mojs.Burst({
   }
 });
 
+
 const circle = new mojs.Shape({
   left: 0, top: 0,
   count: 10,
@@ -179,12 +179,11 @@ const whirl = new mojs.Shape({
   radius: 60
 });
 
-onst timeline = new mojs.Timeline();
+const timeline = new mojs.Timeline();
 
-timeline
-  .add( burst, circle, whirl );
+timeline.add( burst, circle, whirl );
 
-  var clickHandler = ('ontouchstart' in document.documentElement ? "touchstart" : "click");
+var clickHandler = ('ontouchstart' in document.documentElement ? "touchstart" : "click");
 
 document.addEventListener(clickHandler, function(e) {
   const coords = { x: e.pageX, y: e.pageY };
@@ -200,7 +199,6 @@ var typed = new Typed('#quiz-title', {
     strings: ["Welcome to our workshop", data.quiz_title],
     typeSpeed: 30
   });
-
 
 ScrollReveal().reveal('#submit-container', {delay:300});
 ScrollReveal().reveal('.question', {delay: 100});
@@ -224,33 +222,33 @@ function getPercentage(key) {
   }
 
 
-  function loadGraph() {
-    var chart = new CanvasJS.Chart("graph", {
-      width: 600,
-      height: 400,
-      theme: "light2", // "light1", "light2", "dark1", "dark2"
-      exportEnabled: false,
-      animationEnabled: true,
-      responsive: true,
-      title: {
-        text: "what % of each character are you?"
-      },
-      data: [{
-  type: "pie",
-  startAngle: 25,
-  showInLegend: "true",
-  legendText: "{label}",
-  indexLabelFontSize: 16,
-  indexLabel: "{label}: {y}%",
-  dataPoints: [
-    { y: getPercentage("DartHall"), label: "Dartmouth Hall" },
-    { y: getPercentage("Baker"), label: "Baker" },
-    { y: getPercentage("Collis"), label: "Collis" },
-    { y: getPercentage("Foco"), label: "Foco" },
-  ]
-}]
-});
-    })
-    chart.render();
+    function loadGraph() {
+      var chart = new CanvasJS.Chart("graph", {
+        width: 600,
+        height: 400,
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: false,
+        animationEnabled: true,
+        responsive: true,
+        title: {
+          text: "what % of each character are you?"
+        },
+        data: [{
+    type: "pie",
+    startAngle: 25,
+    showInLegend: "true",
+    legendText: "{label}",
+    indexLabelFontSize: 16,
+    indexLabel: "{label}: {y}%",
+    dataPoints: [
+      { y: getPercentage("DartHall"), label: "Dartmouth Hall" },
+      { y: getPercentage("Baker"), label: "Baker" },
+      { y: getPercentage("Collis"), label: "Collis" },
+      { y: getPercentage("Foco"), label: "Foco" },
+    ]
+  }]
+  });
 
-  }
+  chart.render();
+
+    }
